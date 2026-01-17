@@ -1,8 +1,17 @@
-<div class="h-full w-full p-6">
+<div class="h-full w-full flex flex-col p-6 overflow-auto">
     <div class="text-3xl font-primary">All Books</div>
     <div class="w-full grid lg:grid-cols-3 grid-cols-1 gap-2 mt-4">
      @for (item of books(); track $index) {
         <app-books-card [data]="item" ></app-books-card>
+    }
+    </div>
+    <div class="text-3xl font-primary mt-6">My Collection</div>
+    <div class="w-full grid lg:grid-cols-3 grid-cols-1 gap-2 mt-4">
+     @for (item of bookCollection(); track $index) {
+        <app-books-card [data]="item" [mode]="'collection'" ></app-books-card>
+    }
+    @if(bookCollection().length  == 0){
+        <div class="p-4">No Books added yet!</div>
     }
     </div>
 

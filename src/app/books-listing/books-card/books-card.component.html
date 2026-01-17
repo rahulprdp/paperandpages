@@ -1,10 +1,28 @@
-@if(data){
-<div class="p-4 border border-stone-300 rounded-lg font-primary">
-    <div>{{ data.volumeInfo.title }}</div>
-    <div>{{ data.volumeInfo.authors }}</div>
+@if (data) {
+  <div class="p-4 border border-stone-300 rounded-lg font-primary h-full">
+    <div class="text-lg font-bold">{{ data.volumeInfo.title }}</div>
+    <div>By {{ data.volumeInfo.authors }}</div>
+    @if (data.volumeInfo.imageLinks.thumbnail) {
+      <img [src]="data.volumeInfo.imageLinks.thumbnail || ''" />
+    }
     <div class="mt-4">
-        <button class="px-2 py-1 text-xs rounded-md bg-blue-500 text-white">Add to collection</button>
-    </div>
-</div>
-}
+      @if (mode === 'list') {
+        <button
+          class="px-2 py-1 text-xs rounded-md bg-blue-500 text-white cursor-pointer"
+          (click)="addToCollection()"
+        >
+          Add to collection
+        </button>
+      }
 
+      @if (mode === 'collection') {
+        <button
+          class="px-2 py-1 text-xs rounded-md bg-red-500 text-white cursor-pointer"
+          (click)="removeFromCollection()"
+        >
+          Remove from collection
+        </button>
+      }
+    </div>
+  </div>
+}
